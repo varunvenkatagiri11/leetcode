@@ -1,1 +1,15 @@
+def groupAnagrams(strs):
+    anagram_map = defaultdict(list)  # like: { key: [words] }
 
+    for word in strs:
+        count = [0] * 26  # one spot for each letter in alphabet
+
+        for c in word:
+            index = ord(c) - ord('a')  # find which letter it is, 'a' = 0, 'b' = 1, etc.
+            count[index] += 1
+
+        key = tuple(count)  # convert list to tuple so it can be a dictionary key
+
+        anagram_map[key].append(word)  # group word under this "letter count key"
+
+    return list(anagram_map.values())  # get all the grouped anagram lists
